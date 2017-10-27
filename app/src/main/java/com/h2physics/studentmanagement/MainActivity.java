@@ -1,5 +1,6 @@
 package com.h2physics.studentmanagement;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,7 +18,7 @@ import com.h2physics.studentmanagement.network.NetworkManagement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, AdapterView.OnItemLongClickListener{
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
     private ListView mListView;
     private Adapter mAdapter;
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
         mListView.setOnItemClickListener(this);
+        mListView.setOnItemLongClickListener(this);
     }
 
 
@@ -127,5 +129,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Student student = mAdapter.getItem(i);
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra("Student", student);
+        startActivity(intent);
+        return true;
     }
 }

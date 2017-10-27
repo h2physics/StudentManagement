@@ -3,11 +3,13 @@ package com.h2physics.studentmanagement.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by YukiNoHara on 10/25/2017.
  */
 
-public class Student {
+public class Student implements Serializable{
     @SerializedName("id")
     @Expose
     private String mId;
